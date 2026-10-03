@@ -1,0 +1,152 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7gh80gh0y13l"]
+
+[ext_resource type="Script" uid="uid://dxhrfycehl0uy" path="res://demo/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://bx3ty07gtr7j1" path="res://demo/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://d24jsv8eho141" path="res://demo/Potion.tscn" id="3_potion"]
+[ext_resource type="PackedScene" uid="uid://bv8kswowdpux0" path="res://demo/Chest.tscn" id="4_chest"]
+[ext_resource type="Texture2D" uid="uid://bhpm67i1vj70u" path="res://assets/kenney_tiny-dungeon/tile_0114.png" id="5_green"]
+[ext_resource type="Texture2D" uid="uid://ctyw5sd3rpjgh" path="res://assets/kenney_tiny-dungeon/tile_0116.png" id="6_blue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
+size = Vector2(448, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vertical"]
+size = Vector2(16, 320)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="BG" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.07, 1)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -152)
+shape = SubResource("RectangleShape2D_horizontal")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 152)
+shape = SubResource("RectangleShape2D_horizontal")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-216, 0)
+shape = SubResource("RectangleShape2D_vertical")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(216, 0)
+shape = SubResource("RectangleShape2D_vertical")
+
+[node name="Potions" type="Node2D" parent="."]
+
+[node name="Potion1" parent="Potions" instance=ExtResource("3_potion")]
+position = Vector2(-150, -90)
+
+[node name="Potion2" parent="Potions" instance=ExtResource("3_potion")]
+position = Vector2(-90, 40)
+
+[node name="Sprite2D" parent="Potions/Potion2" index="0"]
+texture = ExtResource("5_green")
+
+[node name="Potion3" parent="Potions" instance=ExtResource("3_potion")]
+position = Vector2(-170, 100)
+
+[node name="Sprite2D" parent="Potions/Potion3" index="0"]
+texture = ExtResource("6_blue")
+
+[node name="Potion4" parent="Potions" instance=ExtResource("3_potion")]
+position = Vector2(40, -95)
+
+[node name="Potion5" parent="Potions" instance=ExtResource("3_potion")]
+position = Vector2(110, 90)
+
+[node name="Sprite2D" parent="Potions/Potion5" index="0"]
+texture = ExtResource("5_green")
+
+[node name="Potion6" parent="Potions" instance=ExtResource("3_potion")]
+position = Vector2(170, -20)
+
+[node name="Sprite2D" parent="Potions/Potion6" index="0"]
+texture = ExtResource("6_blue")
+
+[node name="Chest" parent="." instance=ExtResource("4_chest")]
+position = Vector2(150, -95)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(0, 50)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(100, 0)
+zoom = Vector2(2, 2)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Potions" type="Label" parent="HUD"]
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 46.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Potions: 0"
+
+[node name="Panel" type="PanelContainer" parent="HUD"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="HUD/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="HUD/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="HUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Save slots"
+
+[node name="Slots" type="VBoxContainer" parent="HUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Separator" type="HSeparator" parent="HUD/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="HUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+text = "Pick up potions, open the chest, then save."
+autowrap_mode = 3
+
+[node name="Help" type="Label" parent="HUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 13
+text = "WASD or arrow keys to move. E opens the chest.
+
+Save, then grab more potions, then Load: the room resets to the moment you saved. Saves live in user://saves."
+autowrap_mode = 3
