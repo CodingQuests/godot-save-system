@@ -226,4 +226,15 @@ with interactive lessons and real projects.
   builds this save system lesson by lesson: slots, atomic writes, the persist
   group pattern and versioning. The first 4 lessons are free.
 
+## More Free Godot Resources from CodingQuests
+
+Other free, MIT-licensed Godot 4 projects that work well next to this one:
+
+- **[Inventory System](https://github.com/CodingQuests/godot-inventory-system)**: A slot inventory with stacking, drag and drop, tooltips, item use and save data.
+- **[Stats and Leveling](https://github.com/CodingQuests/godot-stats-leveling)**: Health and mana pools, attributes, modifiers tagged by source, an XP curve and stat points.
+- **[Menu System](https://github.com/CodingQuests/godot-menu-system)**: Main, pause and options menus with saved settings, fade transitions and gamepad support.
+- **[Dialogue and Quest System](https://github.com/CodingQuests/godot-dialogue-quest-system)**: Branching dialogue with conditions and effects, quests that track themselves, and a visual dialogue editor.
+
+All twelve are listed on the [CodingQuests GitHub profile](https://github.com/CodingQuests).
+
 Made by [CodingQuests](https://codingquests.io/?utm_source=github&utm_medium=resource&utm_campaign=godot_save_system).
